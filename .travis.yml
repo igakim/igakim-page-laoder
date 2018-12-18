@@ -1,20 +1,16 @@
 language: node_js
-
 node_js:
-  - node
-
+- node
 script:
-  - make lint
-  - make test-coverage
-
+- make lint
+- make test-coverage
+before_script:
+- curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64
+  > ./cc-test-reporter
+- chmod +x ./cc-test-reporter
+- "./cc-test-reporter before-build"
+after_script:
+- "./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT"
 env:
   global:
-    - CC_TEST_REPORTER_ID=dUjfpHSUJncEnwoha8wC+BuviV20X6p0fCLWyT2Jn9U6upyS2FW8Cxn3bksG2ONzL0XtklQSDlVp7cQmICvxaG1A67QhfBArW2wzq/M9eT0SJtsuwiudbEN2fOUHHrW56SqV8RSiVK6zraC0JuIL2zyQrdILd8BKGi6s40JkHS5E4gGKLY4tiRn9Lm+MndxgOr3CNhbipA3KjDQf5/jxh8jZWY2LjSQfviwDIC1kXMWF5d8ltZ4Jc8MBu2xHnpgyyvVko3ySS9LHeG9fKATlR1p3d69aHDTrB3/9G27TPbbI02DxGqJtI95E+oqpnAosU8aN1+dvNAvqQotiojmvuTBO+Kxy9bAkmjez3V7bYyI2uMqrr4LrjQvuI4zX7raFjsRN2h9Hg1fDyouxn4rgOKBDYxjxr8QuvXCYw+ATEsKP8rwkzM5kQGHMIBPRuqp4oVmSY+OsQyAZo2/1ca+Wt99j03m2g8c/HG9GEeGSCmUoy6PDATxcfEQInLWd20HqBkK8HUeWNe5d52XtKLsf1c8UGkqj/iEHojG0cK8dWoeLcDQN9ISLra95gdXtsTrwAF/0wlKFtMnEMGxvTqYbBYJug50vx7RH44YeKWQkHLlM8kHKgpa1t7phEWb6gfKGQ+SJTV34/dzkb7OXjyIhmzOH8MJPU4xZE6KpqaRSxgw=
-
-before_script:
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    secure: hazoNht5aSXZuCSmjnND69nYp0gG2zdBpbs7TJCz4YGK5xj2EKOBxU5p4YQNqtw6pno0S38ZBQwZVZC7Ie3Xd5v/DuyDoIYhkGdL/tWpRTbeHOylOAxW0H/pcCIjTM16kSvr4w9q8HFDSYj6WfnxX8Ryoo7p/UwC7KDOblSQikwd1VwrmeOtr0RlPwo2AgEvtVYeu8io7ZVxG7mttcOX+ZPkZMUjwLmGbxPLldC3oVcYoEzGZ29/7aQ919ZjwuhoxJVnXFZaEFNGuvKrUGLIZnc0DfLoqj32hDveirW4TNAwgb6ruCwiNdtWkhhcDfKUH4xLZHaoRKCLAka3GsPBNHmn5AVP2IIRGD3Eyi5bHMUzEL5YEXq34uKBx6RpnPGtVmVuK3QxiGbM85ol26cROuqVfxVfwFpiRV2A9Cd9B3/qpxZJAcqQyuvRTLLra8RdXVWAyMfvm67Go1rDa42lqUz2t8IJ12QbYrJEKZVB0IPuhLmFld2DtfvDu2J4bYxsw4wLrs/RoP/yuZdIxavDEvje9ZUZ9tZMhbYS/c3NpaF7xlZ70z9hElwrC//cdd9Y3DuawL5I59FNfMKzjuo/b9Xi1OBvg9/Z+5YK9AWpDON+P0HCKSbN2ai0Ww7SITVKMc00YFpTqvnulbwpOC7r9FOY186rLJJXBQVGMiYRJOU=
