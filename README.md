@@ -3,4 +3,15 @@
 [![Build Status](https://travis-ci.org/igakim/project-lvl3-s370.svg?branch=master)](https://travis-ci.org/igakim/project-lvl3-s370)
 
 # Page Loader
-Реализация третьего проекта в рамках обучения на [Хекслете](https://hexlet.io/)
+
+A Page Loader is a simple utility for downloading web pages.
+
+## Install
+
+```sh
+npm install igakim-page-loader
+```
+
+## Asciinemas
+
+* [Step 1: install and check](https://asciinema.org/a/1rvSJbyo0qHYkKb3Ke5OuK2Jg)
