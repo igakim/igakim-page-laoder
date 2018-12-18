@@ -1,11 +1,14 @@
 {
   "name": "igakim-page-loader",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "",
   "main": "index.js",
   "bin": {
     "page-loader": "dist/bin/page-loader.js"
   },
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "test": "jest",
     "babel-node": "babel-node",
