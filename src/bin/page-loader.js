@@ -4,7 +4,7 @@ import program from 'commander';
 import pageLoader from '..';
 
 program
-  .version('0.0.1')
+  .version('0.0.5')
   .description('Download web pages')
   .arguments('<url>')
   .option('--output [type]', 'Output folder')
