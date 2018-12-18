@@ -10,7 +10,10 @@ const pageLoader = (pageUrl, options = {}) => axios.get(pageUrl)
     const { pathname, host } = url.parse(pageUrl);
     const dir = options.output || '.';
     const fileName = getFileName(path.join(host, pathname));
-    return fsp.writeFile(path.resolve(dir, fileName), res.data);
+    const fullPath = path.resolve(dir, fileName);
+    fsp.writeFile(fullPath, res.data);
+    return fullPath;
   })
-  .catch(e => console.log(e));
+  .then(fullPath => console.log(`page successfully downloaded to ${fullPath}`))
+  .catch(() => console.log('Couldn\'t load page'));
 export default pageLoader;
