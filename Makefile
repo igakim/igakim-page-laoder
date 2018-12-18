@@ -11,3 +11,6 @@ test-coverage:
 
 build:
 	npm run build
+
+publish:
+	npm publish
