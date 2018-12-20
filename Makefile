@@ -6,6 +6,8 @@ lint:
 
 test:
 	npm run test
+test-watch:
+	npm run test -- --watch
 test-coverage:
 	npm run test -- --coverage
 
