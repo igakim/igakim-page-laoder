@@ -9,6 +9,12 @@
   "files": [
     "dist"
   ],
+  "jest": {
+    "testPathIgnorePatterns": [
+      "./__tests__/__fixtures__"
+    ],
+    "testEnvironment": "node"
+  },
   "scripts": {
     "test": "jest",
     "babel-node": "babel-node",
@@ -35,7 +41,9 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
+    "lodash": "^4.17.11",
     "nock": "^10.0.4"
   }
 }
