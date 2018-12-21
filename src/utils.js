@@ -16,7 +16,7 @@ export const getResourceName = (pathname, end) => pathname
   .replace(/[^\w]/g, '-')
   .concat(end);
 
-export const getDownloadLinks = ($, defaultUrl) => {
+export const getResourcesLinks = ($, defaultUrl) => {
   const tagsNames = Object.keys(tags);
   const allLinks = tagsNames
     .map(tag => $(tag)
@@ -46,7 +46,7 @@ export const getDownloadLinks = ($, defaultUrl) => {
   return flattenDeep(allLinks);
 };
 
-export const linkReplace = ($, directoryName) => {
+export const replaceLinks = ($, directoryName) => {
   const tagsNames = Object.keys(tags);
   tagsNames.forEach((tag) => {
     $(tag).each((i, el) => {
