@@ -37,10 +37,6 @@ beforeAll(async () => {
   nock(host)
     .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
     .get('/assets/js/script.js')
-    .reply(404);
-  nock(host)
-    .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
-    .get('/assets/js/script.js')
     .replyWithFile(200, path.join(__dirname, '__fixtures__/assets/js/script.js'));
   nock(host)
     .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
@@ -61,4 +57,20 @@ it('should work if file exists and has body', async () => {
   const expected = await fsp.readFile(path.join(output, fileName), 'utf-8');
   const body = await fsp.readFile(path.resolve(__dirname, '__snapshots__/index.html'), 'utf-8');
   expect(expected.trim()).toBe(body);
+});
+
+it('should throw an error', async () => {
+  const output = await fsp.mkdtemp(path.join(os.tmpdir(), 'hexlet-'));
+  nock('https://hexlet.test/')
+    .defaultReplyHeaders({ 'access-control-allow-origin': '*' })
+    .get('/assets/js/script.js')
+    .reply(404);
+
+  const tt = async () => {
+    try {
+      await pageLoader('https://hexlet.test/assets/js/script.js', { output });
+    } catch(e) {
+      expect(e.message).toMatch('Request failed with status code 404');
+    }
+  }
 });
