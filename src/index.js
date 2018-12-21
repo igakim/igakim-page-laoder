@@ -21,7 +21,7 @@ const downloadResource = (resource, directory) => {
     })
     .catch((e) => {
       a('resource wasn\'n downloaded %s', path.join(directory, fileName));
-      throw new Error(`One or more files were not downloaded. Response status - ${e.response.status}`);
+      throw new Error(`One or more files were not downloaded. ${e.message}`);
     });
 };
 
@@ -50,8 +50,8 @@ const pageLoader = (pageUrl, options = {}) => {
     })
     .then(() => a('all resources processed and downlaoded'))
     .catch((e) => {
-      a('all resources processed');
       a(e);
+      throw e;
     });
 };
 // Я понял что нужно контролировать, но не знаю как реализовать здесь.
