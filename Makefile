@@ -5,7 +5,7 @@ lint:
 	npm run eslint .
 
 test:
-	npm run test
+	DEBUG=page-loader npm run test
 test-watch:
 	npm run test -- --watch
 test-coverage:
