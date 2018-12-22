@@ -1,6 +1,6 @@
 {
   "name": "igakim-page-loader",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "",
   "main": "index.js",
   "bin": {
@@ -45,6 +45,7 @@
     "cheerio": "^1.0.0-rc.2",
     "commander": "^2.19.0",
     "debug": "^4.1.0",
+    "listr": "^0.14.3",
     "lodash": "^4.17.11",
     "nock": "^10.0.4"
   }
