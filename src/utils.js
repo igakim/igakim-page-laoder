@@ -22,13 +22,14 @@ export const getResourcesLinks = ($, defaultUrl) => {
     .map(tag => $(tag)
       .map((i, el) => {
         const tagUrl = $(el).attr(tags[tag]);
-        if (tagUrl) {
+
+        if (tagUrl && !url.parse(tagUrl).host) {
           const {
-            pathname, protocol, host, query, search,
+            pathname, query, search,
           } = url.parse(tagUrl);
           const urlFormat = {
-            protocol: protocol || defaultUrl.protocol,
-            host: host || defaultUrl.host,
+            protocol: defaultUrl.protocol,
+            host: defaultUrl.host,
             pathname,
             query,
             search,
@@ -51,7 +52,7 @@ export const replaceLinks = ($, directoryName) => {
   tagsNames.forEach((tag) => {
     $(tag).each((i, el) => {
       const tagUrl = $(el).attr(tags[tag]);
-      if (tagUrl) {
+      if (tagUrl && !url.parse(tagUrl).host) {
         const { pathname } = url.parse(tagUrl);
         const { dir, ext, name } = path.parse(pathname);
         const assetName = getResourceName(path.format({ dir, name }), ext);
