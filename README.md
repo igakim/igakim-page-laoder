@@ -19,3 +19,5 @@ npm install igakim-page-loader
 * [Step 2: download resources](https://asciinema.org/a/YjUvr782SCjzLsX8d8fBaEaJZ)
 
 * [Step 3: debug](https://asciinema.org/a/OoUQ8JqlrPUsjDMEss72H8hRU)
+
+* [Step 5: Listr](https://asciinema.org/a/gmOlNE9zXam1EpPOeMNaydKQY)
