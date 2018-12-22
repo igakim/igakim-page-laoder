@@ -4,23 +4,24 @@ import url from 'url';
 import path from 'path';
 import cheerio from 'cheerio';
 import debug from 'debug';
+import Listr from 'listr';
 
 import { getResourceName, replaceLinks, getResourcesLinks } from './utils';
 
-const a = debug('page-loader');
+const log = debug('page-loader');
 const downloadResource = (resource, directory) => {
   const { actualUrl, fileName } = resource;
-  return axios({
+  return () => axios({
     method: 'get',
     url: actualUrl,
     responseType: 'stream',
   })
     .then((res) => {
       res.data.pipe(createWriteStream(path.join(directory, fileName)));
-      a('resource dowloaded %s', path.join(directory, fileName));
+      log('resource dowloaded %s', path.join(directory, fileName));
     })
     .catch((e) => {
-      a('resource wasn\'n downloaded %s', path.join(directory, fileName));
+      log('resource wasn\'n downloaded %s', path.join(directory, fileName));
       throw new Error(`One or more files were not downloaded. ${e.message}`);
     });
 };
@@ -41,26 +42,23 @@ const pageLoader = (pageUrl, options = {}) => {
       const newBody = replaceLinks($, assetsDirectoryName);
       return fsp.writeFile(fullPathToHtml, newBody);
     })
-    .then(() => a('html file downloaded'))
+    .then(() => log('html file downloaded to %s', directory))
     .then(() => fsp.mkdir(fullPathToAssetsDirectory))
-    .then(() => a('assets directory created'))
+    .then(() => log('assets directory created in %s', fullPathToAssetsDirectory))
     .then(() => {
-      const promises = resourcesLinks.map(el => downloadResource(el, fullPathToAssetsDirectory));
-      return Promise.all(promises);
+      const resourcesTasks = resourcesLinks.map(el => ({
+        title: `Download ${el.fileName}`,
+        task: downloadResource(el, fullPathToAssetsDirectory),
+      }));
+      const tasks = new Listr(resourcesTasks, { concurrent: true, exitOnError: false });
+      return tasks;
+      // return Promise.all(promises);
     })
-    .then(() => a('all resources processed and downlaoded'))
+    .then(tasks => tasks.run().catch(() => console.error('Some file wasn\'t download')))
+    .then(() => log('all resources processed and downlaoded to %s', fullPathToAssetsDirectory))
     .catch((e) => {
-      a(e);
+      log(e);
       throw e;
     });
 };
-// Я понял что нужно контролировать, но не знаю как реализовать здесь.
-// Я исхожу из следующей лоики - Один из ресурсов может быть не скачан, например 404
-// Но остальные все равно должны быть скачаны, поэтому Promise.all для загрузки не подойдет.
-// Поэтому нужно бросать все по отдельности и скачивать (map).
-// Но как внутри map сделать без остановки не понимаю.
-// Решил сложить все промисы в массив и вернуть их.
-// Но если хоть один промис в состоянии rejected,
-// то ни один then дальше не отработает.
-
 export default pageLoader;
