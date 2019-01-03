@@ -12,12 +12,6 @@ A Page Loader is a simple utility for downloading web pages.
 npm install igakim-page-loader
 ```
 
-## Asciinemas
+## Work example
 
-* [Step 1: install and check](https://asciinema.org/a/1rvSJbyo0qHYkKb3Ke5OuK2Jg)
-
-* [Step 2: download resources](https://asciinema.org/a/YjUvr782SCjzLsX8d8fBaEaJZ)
-
-* [Step 3: debug](https://asciinema.org/a/OoUQ8JqlrPUsjDMEss72H8hRU)
-
-* [Step 5: Listr](https://asciinema.org/a/gmOlNE9zXam1EpPOeMNaydKQY)
+* [Page Loader](https://asciinema.org/a/gmOlNE9zXam1EpPOeMNaydKQY)
